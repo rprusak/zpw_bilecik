@@ -1,9 +1,45 @@
-<div class="card" style="width: 100%;">
-  <div class="card-body">
-    <h5 class="card-title">Szegóły wydarzenia</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+<div class="card">
+  <div class="card-header">
+    <%=	"#{@event.name}" %>
   </div>
+  <img class="card-img-top" src=<%= "#{@event.image}" %>>
+  <div class="card-body">
+    <p class="card-text">
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>Opis:</td>
+            <td><%= @event.description %></td>
+          </tr>
+          <tr>
+            <td>Data:</td>
+            <td><%= @event.event_date %></td>
+          </tr>
+          <tr>
+            <td>Cena biletu:</td>
+            <td><%= @event.price %></td>
+          </tr>
+          <tr>
+            <td>Ilość miejsc</td>
+            <td><%= @event.size %></td>
+          </tr>
+          <tr>
+            <td>Wykupione miejsca</td>
+            <td>
+              TODO
+            </td>
+          </tr>
+          <tr>
+            <td>Dostępne dla dzieci</td>
+            <td>
+              <% if(@event.for_children) %>
+                <%= "tak" %>
+              <% else %>
+                <%= "nie" %>
+              <% end %>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
 </div>

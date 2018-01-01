@@ -9,9 +9,11 @@
         <%= "#{@description}" %>
       </p>
       <hr>
-      <a class="btn btn-lg btn-success" href="#" role="button">Dodaj nowe wydarzenie</a>
-      <a class="btn btn-lg btn-primary" href="#" role="button">Przeglądaj wydarzenia</a>
-
+      <div style="text-align: center">
+        <%= link_to 'Dodaj nowe wydarzenie', new_event_path, class: "btn btn-lg btn-success" %>
+        <%= link_to 'Przeglądaj wydarzenia', events_path, class: "btn btn-lg btn-success" %>
+        <a class="btn btn-lg btn-info" href="#" role="button">Zaloguj się</a>
+      </div>
     </div>
   </div>
 

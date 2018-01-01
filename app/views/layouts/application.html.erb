@@ -2,10 +2,7 @@
 <html>
   <head>
     <title>ZpwBilecik</title>
-    <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
@@ -26,7 +23,7 @@
   <body>
     <%= render 'layouts/navigation' %>
 
-    <div class="container">
+    <div class="container" style="margin-top: 60px">
       <%= yield %>
     </div>
 

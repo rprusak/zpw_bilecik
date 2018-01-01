@@ -3,15 +3,21 @@ class EventsController < ApplicationController
 
   end
 
-  def create
-
-  end
-
   def index
-
+    @events = Event.all
+    puts @events
   end
 
   def show
+    @event = Event.find(params[:id])
+  end
 
+  def create
+    puts params
+    @event = Event.new(params.require(:event).permit(:name, :description, :price, :event_date, :size, :image,
+                                                     :for_children))
+
+    @event.save
+    redirect_to @event
   end
 end

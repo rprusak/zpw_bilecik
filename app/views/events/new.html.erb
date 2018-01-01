@@ -1,9 +1,81 @@
 <div class="card" style="width: 100%;">
   <div class="card-body">
-    <h5 class="card-title">Dodaj nowe wydarzenie</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h5 class="card-title">W celu utworzenia wydarzenia, wypełnij poniższy formularz:</h5>
+    <hr>
+
+    <%= form_with scope: :event, url: events_path, local: true do |form| %>
+
+      <div class="form-group row">
+        <div class="col-lg-2">
+          <%= form.label :name %><br>
+        </div>
+        <div class="col-lg-10">
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-2">
+          <%= form.label :description %><br>
+        </div>
+        <div class="col-lg-10">
+          <%= form.text_area :description, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-2">
+          <%= form.label :price %><br>
+        </div>
+        <div class="col-lg-10">
+          <%= form.number_field :price, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-2">
+          <%= form.label :event_date %><br>
+        </div>
+        <div class="col-lg-10">
+          <%= form.date_field :event_date, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-2">
+          <%= form.label :size %><br>
+        </div>
+        <div class="col-lg-10">
+          <%= form.number_field :size, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-2">
+          <%= form.label :for_children %><br>
+        </div>
+        <div class="col-lg-10">
+          <%= form.check_box :for_children %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-2">
+          <%= form.label :image %><br>
+        </div>
+        <div class="col-lg-10">
+          <%= form.text_field :image, class: "form-control" %>
+        </div>
+      </div>
+
+
+
+      <p>
+        <%= form.submit class: "btn btn-success"%>
+      </p>
+    <% end %>
+
+
+
   </div>
 </div>

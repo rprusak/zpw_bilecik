@@ -1,1 +1,62 @@
-<h2>Lista nadchodzących wydarzeń:</h2>
+<h2></h2>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+      Lista nadchodzących wydarzeń:
+    </li>
+  </ol>
+</nav>
+
+<% @events.each do |event| %>
+  <div class="card" style="margin-top: 10px">
+    <h5 class="card-header">
+      <%= event.name %>
+    </h5>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="row">
+          <div class="col-lg-4">
+            <img src="http://via.placeholder.com/300x300" alt="">
+          </div>
+          <div class="col-lg-8">
+            <table class="table">
+              <tbody>
+              <tr>
+                <td>Opis:</td>
+                <td><%= event.description %></td>
+              </tr>
+              <tr>
+                <td>Data:</td>
+                <td><%= event.event_date %></td>
+              </tr>
+              <tr>
+                <td>Cena biletu:</td>
+                <td><%= event.price %></td>
+              </tr>
+              <tr>
+                <td>Ilość miejsc</td>
+                <td><%= event.size %></td>
+              </tr>
+              <tr>
+                <td>Dostępne dla dzieci</td>
+                <td>
+                  <% if(event.for_children) %>
+                    <%= "tak" %>
+                  <% else %>
+                    <%= "nie" %>
+                  <% end %>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <div style="text-align: right; width: 100%">
+        <a href="#" class="btn btn-primary">Szczegóły</a>
+        <a href="#" class="btn btn-success">Kup bilet</a>
+        <a href="#" class="btn btn-danger">Usuń wydarzenie</a>
+      </div>
+    </div>
+  </div>
+<% end %>

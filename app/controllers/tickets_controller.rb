@@ -44,7 +44,7 @@ class TicketsController < ApplicationController
       @taken += ticket.places
     end
 
-    if @event.places - @taken < @ticket.places
+    if @event.size - @taken < @ticket.places
       redirect_to event_path(@event), alert: "There are not enough places left for this event."
       return
     end

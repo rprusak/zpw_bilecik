@@ -46,5 +46,13 @@
 </div>
 
 <% if user_signed_in? %>
-  <%= render 'events/ticketFrom' %>
+  <% if @event.tickets.exists?(user_id: current_user.id) %>
+    <div class="card" style="margin-top: 10px">
+      <div class="card-body">
+        You have already bought ticket to this event.
+      </div>
+    </div>
+  <% else %>
+    <%= render 'events/ticketFrom' %>
+  <% end %>
 <% end %>

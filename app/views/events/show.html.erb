@@ -8,49 +8,43 @@
         <table class="table">
           <tbody>
           <tr>
-            <td>Opis:</td>
-            <td><%= @event.description %></td>
-          </tr>
-          <tr>
-            <td>Data:</td>
+            <td>Date:</td>
             <td><%= @event.event_date %></td>
           </tr>
           <tr>
-            <td>Cena biletu:</td>
+            <td>Ticket price:</td>
             <td><%= @event.price %></td>
           </tr>
           <tr>
-            <td>Ilość miejsc</td>
+            <td>Number of places:</td>
             <td><%= @event.size %></td>
           </tr>
           <tr>
-            <td>Wykupione miejsca</td>
+            <td>Bought places:</td>
             <td>
-              TODO
+              <%= @taken %>
             </td>
           </tr>
           <tr>
-            <td>Dostępne dla dzieci</td>
+            <td>Available for childred</td>
             <td>
               <% if(@event.for_children) %>
-                <%= "tak" %>
+                <%= "Yes" %>
               <% else %>
-                <%= "nie" %>
+                <%= "no" %>
               <% end %>
             </td>
           </tr>
           </tbody>
         </table>
+
+        <%= @event.description %>
+
+
       </p>
-      <h2>Buy ticket:</h2>
-      <%= form_with(model: [ @event, @event.tickets.build ], local: true) do |form| %>
-        <p>
-          <%= form.label :places %><br>
-          <%= form.number_field :places %>
-        </p>
-        <p>
-          <%= form.submit %>
-        </p>
-      <% end %>
     </div>
 </div>
+
+<% if user_signed_in? %>
+  <%= render 'events/ticketFrom' %>
+<% end %>

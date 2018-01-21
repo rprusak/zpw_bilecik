@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  
+
   def new
 
   end
@@ -12,6 +12,12 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+
+    @taken = 0
+    @event.tickets.each do |ticket|
+      @taken += ticket.places
+    end
+
   end
 
   def create

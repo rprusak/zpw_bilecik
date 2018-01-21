@@ -1,0 +1,16 @@
+<div class="card" style="margin-top: 10px">
+  <div class="card-header">
+    Buy ticket:
+  </div>
+  <div class="card-body">
+    <%= form_with(model: [ @event, @event.tickets.build ], local: true) do |form| %>
+      <p>
+        <%= form.label :places %><br>
+        <%= form.number_field :places %>
+      </p>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
+  </div>
+</div>

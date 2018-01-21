@@ -1,8 +1,11 @@
 class TicketsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @event = Event.find(params[:event_id])
     @ticket = @event.tickets.create(ticket_params)
-    redirect_to event_path(@event)
+    @message = "dupa dupa"
+    redirect_to event_path(@event), notice: "You bought new ticket."
   end
 
   def ticket_params

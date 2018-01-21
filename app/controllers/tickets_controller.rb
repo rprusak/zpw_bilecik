@@ -38,6 +38,17 @@ class TicketsController < ApplicationController
       return
     end
 
+    # check if there are enough places
+    @taken = 0
+    @event.tickets.each do |ticket|
+      @taken += ticket.places
+    end
+
+    if @event.places - @taken < @ticket.places
+      redirect_to event_path(@event), alert: "There are not enough places left for this event."
+      return
+    end
+
     if @ticket.save
       @user = User.find(current_user.id)
       @user.money -= @ticket.places * @event.price

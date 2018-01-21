@@ -24,9 +24,24 @@ class TicketsController < ApplicationController
     @params["event_id"] = params[:event_id]
     @params["user_id"] = current_user.id
 
+    # check if user has already ticket for this event
+    if @event.tickets.exists?(user_id: current_user.id)
+      redirect_to event_path(@event), alert: "You already have ticket for this event!"
+      return
+    end
 
     @ticket = Ticket.new(@params)
+
+    # check if user has enough money
+    if @ticket.places * @event.price > current_user.money
+      redirect_to event_path(@event), alert: "You don't have enough money!"
+      return
+    end
+
     if @ticket.save
+      @user = User.find(current_user.id)
+      @user.money -= @ticket.places * @event.price
+      @user.save
       redirect_to event_path(@event), notice: "You bought new ticket."
       return
     else

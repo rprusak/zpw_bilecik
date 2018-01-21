@@ -1,6 +1,10 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
 
+  def all
+    @tickets = current_user.tickets
+  end
+
   def create
     @event = Event.find(params[:event_id])
 

@@ -1,0 +1,24 @@
+<% @tickets.each do |ticket| %>
+  <div class="card" style="margin-bottom: 10px">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3">
+          <b>Event:</b> <%= ticket.event.name %>
+        </div>
+        <div class="col-3">
+          <b>Date:</b> <%= ticket.event.event_date %>
+        </div>
+        <div class="col-2">
+          <b>Places:</b> <%= ticket.places %>
+        </div>
+        <div class="col-2">
+          <b>Price:</b> <%= ticket.places * ticket.event.price %>
+        </div>
+        <div class="col-2" style="text-align: right">
+          <a href="#" class="btn btn-warning btn-sm" role="button" aria-disabled="true">Return ticket</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

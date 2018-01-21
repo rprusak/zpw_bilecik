@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :events do
     resources :tickets
   end
+
+  get "tickets/all"
 end

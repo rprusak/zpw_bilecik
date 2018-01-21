@@ -5,6 +5,12 @@ class TicketsController < ApplicationController
     @tickets = current_user.tickets
   end
 
+  def destroy
+    @tickets = current_user.tickets.find(params[:id])
+    @tickets.destroy
+    redirect_to tickets_all_path, notice: "Your ticket has been deleted."
+  end
+
   def create
     @event = Event.find(params[:event_id])
 

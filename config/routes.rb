@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   end
 
   get "tickets/all"
+  get "money/index"
+
+  resources :money
 end

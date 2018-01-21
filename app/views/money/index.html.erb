@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-body">
+    Your account balance: <%= current_user.money %>
+    <hr>
+
+    <%= link_to 'Add 1000 to your account', "/money", method: "post",class: "btn btn-success" %>
+
+  </div>
+</div>

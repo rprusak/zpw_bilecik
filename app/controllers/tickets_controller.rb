@@ -6,8 +6,14 @@ class TicketsController < ApplicationController
   end
 
   def destroy
-    @tickets = current_user.tickets.find(params[:id])
-    @tickets.destroy
+    @t = current_user.tickets.find(params[:id])
+    @money = @t.places * @t.event.price
+    @t.destroy
+
+    @user = User.find(current_user.id)
+    @user.money += @money
+    @user.save
+
     redirect_to tickets_all_path, notice: "Your ticket has been deleted."
   end
 

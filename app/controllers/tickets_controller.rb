@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
 
   def destroy
     @t = current_user.tickets.find(params[:id])
-    @money = @t.places * @t.event.price
+    @money = @t.places * @t.event.price * 0.75
     @t.destroy
 
     @user = User.find(current_user.id)

@@ -17,10 +17,34 @@ class TicketsController < ApplicationController
   end
 
   def destroy
-    @t = current_user.tickets.find(params[:id])
+    if !current_user.is_admin
+      @t = current_user.tickets.find(params[:id])
+
+      if @t.event.event_date.past?
+        redirect_to tickets_all_path, alert: "You can not remove tickets for events from past."
+        return
+      end
+
+      if !@t.to_return
+        @t.to_return = true
+        @t.save
+        redirect_to tickets_all_path, notice: "Your ticket has been marked to return."
+        return
+      else
+        redirect_to tickets_all_path, alert: "Your ticket is already marked to return."
+        return
+      end
+    end
+
+    @t = Ticket.find(params[:id])
 
     if @t.event.event_date.past?
       redirect_to tickets_all_path, alert: "You can not remove tickets for events from past."
+      return
+    end
+
+    if !@t.to_return
+      redirect_to tickets_all_path, alert: "You can not remove this ticket."
       return
     end
 
@@ -31,7 +55,7 @@ class TicketsController < ApplicationController
     @user.money += @money
     @user.save
 
-    redirect_to tickets_all_path, notice: "Your ticket has been deleted."
+    redirect_to tickets_all_path, notice: "Ticket has been deleted."
   end
 
   def create

@@ -24,8 +24,16 @@ class EventsController < ApplicationController
     @event = Event.new(params.require(:event).permit(:name, :description, :price, :event_date, :size, :image,
                                                      :for_children))
 
-    @event.save
-    redirect_to @event
+    if @event.save
+      redirect_to @event, notice: "You created new event."
+      return
+    else
+      @error_text = ""
+      @event.errors.full_messages.each {|m| @error_text += m + ". "}
+      redirect_to new_event_path, alert: @error_text
+      return
+    end
+
   end
 
   def destroy

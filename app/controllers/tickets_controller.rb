@@ -30,6 +30,12 @@ class TicketsController < ApplicationController
     @params["event_id"] = params[:event_id]
     @params["user_id"] = current_user.id
 
+    # check if event is not from past
+    if @event.event_date.past?
+      redirect_to event_path(@event), alert: "You can not buy tickets for events from past!"
+      return
+    end
+
     # check if user has already ticket for this event
     if @event.tickets.exists?(user_id: current_user.id)
       redirect_to event_path(@event), alert: "You already have ticket for this event!"

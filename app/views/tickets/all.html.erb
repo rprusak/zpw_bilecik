@@ -1,6 +1,14 @@
 <% @tickets.each do |ticket| %>
   <div class="card" style="margin-bottom: 10px">
     <div class="card-body">
+      <% if current_user.is_admin %>
+        <div class="row">
+          <div class="col-6">
+            <b>Owner of ticket:</b> <%= ticket.user.email %>
+          </div>
+        </div>
+      <% end %>
+
       <div class="row">
         <div class="col-3">
           <b>Event:</b> <%= ticket.event.name %>

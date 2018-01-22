@@ -39,9 +39,11 @@
         </table>
 
         <%= @event.description %>
-
-
       </p>
+    <% if current_user.is_admin %>
+      <hr>
+      <%= link_to 'See tickets bought for this event', event_tickets_path(@event), class:"btn btn-info", style: "display: inline" %>
+    <% end %>
     </div>
 </div>
 

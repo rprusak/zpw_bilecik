@@ -1,8 +1,19 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user, only: [:index]
+
+  def index
+    @event = Event.find(params[:event_id])
+    @tickets = @event.tickets
+  end
 
   def all
-    @tickets = current_user.tickets
+    if current_user.is_admin
+      @tickets = Ticket.all
+    else
+      @tickets = current_user.tickets
+    end
+
   end
 
   def destroy
@@ -89,4 +100,11 @@ class TicketsController < ApplicationController
   def ticket_params
     params.require(:ticket).permit(:places)
   end
+
+  def correct_user
+    if !current_user.is_admin
+      redirect_to events_path, alert: "Only administrator can perform this action!"
+    end
+  end
+
 end

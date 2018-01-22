@@ -15,7 +15,13 @@
           <b>Price:</b> <%= ticket.places * ticket.event.price %>
         </div>
         <div class="col-2" style="text-align: right">
-          <a href=<%= "/events/#{ticket.event.id}/tickets/#{ticket.id}" %> class="btn btn-warning btn-sm" role="button" data-method="delete" aria-disabled="true">Return ticket</a>
+          <% if ticket.event.event_date.past? %>
+            <button type="button" class="btn btn-secondary">
+              Event time passed.
+            </button>
+          <% else %>
+            <a href=<%= "/events/#{ticket.event.id}/tickets/#{ticket.id}" %> class="btn btn-warning" role="button" data-method="delete" aria-disabled="true">Return ticket</a>
+          <% end %>
         </div>
       </div>
     </div>

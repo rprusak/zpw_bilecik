@@ -7,6 +7,12 @@ class TicketsController < ApplicationController
 
   def destroy
     @t = current_user.tickets.find(params[:id])
+
+    if @t.event.event_date.past?
+      redirect_to tickets_all_path, alert: "You can not remove tickets for events from past."
+      return
+    end
+
     @money = @t.places * @t.event.price * 0.75
     @t.destroy
 

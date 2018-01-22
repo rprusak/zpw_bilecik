@@ -36,6 +36,11 @@ class TicketsController < ApplicationController
       return
     end
 
+    if (@event.event_date - Date.today).to_i > 31
+      redirect_to event_path(@event), alert: "You can buy ticket only month before event."
+      return
+    end
+
     # check if user has already ticket for this event
     if @event.tickets.exists?(user_id: current_user.id)
       redirect_to event_path(@event), alert: "You already have ticket for this event!"
@@ -43,6 +48,12 @@ class TicketsController < ApplicationController
     end
 
     @ticket = Ticket.new(@params)
+
+    #check if ticket has valid places number
+    if @ticket.places < 1 || @ticket.places > 5
+      redirect_to event_path(@event), alert: "Invalid number of places!"
+      return
+    end
 
     # check if user has enough money
     if @ticket.places * @event.price > current_user.money

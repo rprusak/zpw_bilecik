@@ -58,8 +58,15 @@
           You can not buy tickets for events from past!
         </div>
       </div>
+    <% else if (@event.event_date - Date.today).to_i > 31 %>
+        <div class="card" style="margin-top: 10px">
+          <div class="card-body">
+            You can buy ticket only month before event.
+          </div>
+        </div>
   <% else %>
     <%= render 'events/ticketFrom' %>
   <% end %>
+<% end %>
 <% end %>
 <% end %>
